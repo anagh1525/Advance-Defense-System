@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADVANCE DEFENSE SYSTEM (ADS)</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+
+      .body {
+        background-color: #c5c6d0;
+        margin: 0;
+        padding: 0;
+        font-family: Roboto, sans-serif;
+      }
+      .head-box {
+        background-color: #000000;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .heading1 {
+        font-size: 50px;
+        color: #ffffff;
+        margin: 0;
+        font-weight: bold;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .form_box {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .start {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 30px;
+        color: #333;
+      }
+      .label_head {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      .unit_drop,
+      .enemy_drop,
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .unit_drop {
+        color: #00363d;
+        background-color: #bfc8ca;
+      }
+      .enemy_drop {
+        color: #ffffff;
+        background-color: #314b4f;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #708238;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .button:hover {
+        background-color: #5a6a2d;
+      }
+      .output_box {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .heading2 {
+        font-size: 30px;
+        color: #000000;
+        font-weight: bold;
+      }
+      h2 {
+        color: #333;
+        margin-top: 30px;
+        margin-bottom: 20px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="body">
+    <div class="head-box">
+      <h1 class="heading1">ADVANCE DEFENSE SYSTEM (ADS)</h1>
+    </div>
+    <div class="container login">
+      <h2 class="start">>> Let AI Decide Your Defense System >></h2>
+      <form class="form_box" action="{{ url_for('predict')}}" method="post">
+        <h2>ENTER FRIENDS DETAILS</h2>
+        <label class="label_head unit" for="unit_size">UNIT SIZE</label>
+        <input
+          class="unit_drop"
+          type="text"
+          id="unit_size"
+          name="unit_size"
+          placeholder="Enter Unit Size"
+          required="required"
+        />
+
+        <label class="label_head unit" for="unit_name">UNIT NAME</label>
+        <select class="unit_drop" name="unit_name" id="unit_name">
+          <option value="">Select a Unit Size</option>
+          <option value="Fire Team">Fire Team</option>
+          <option value="Squad">Squad</option>
+          <option value="Platoon">Platoon</option>
+          <option value="Company">Company</option>
+          <option value="Battalion">Battalion</option>
+        </select>
+
+        <label class="label_head unit" for="unit_type">UNIT TYPE</label>
+        <select class="unit_drop" name="unit_type" id="unit_typ">
+          <option value="">Select a Unit Type</option>
+          <option value="Infantry">Infantry</option>
+          <option value="Armored">Armored</option>
+          <option value="Special Forces">Special Forces</option>
+          <option value="Mechanized">Mechanized</option>
+          <option value="Airborne">Airborne</option>
+          <option value="Engineers">Engineers</option>
+          <option value="Military Police">Military Police</option>
+          <option value="Reconnaissance">Reconnaissance</option>
+          <option value="Combat Medic Team">Combat Medic Team</option>
+        </select>
+
+        <label class="label_head unit" for="experience_level"
+          >EXPERIENCE LEVEL</label
+        >
+        <select class="unit_drop" name="experience_level" id="experience_level">
+          <option value="">Select an Experience Level</option>
+          <option value="Rookie">Rookie</option>
+          <option value="Mixed">Mixed</option>
+          <option value="Veteran">Veteran</option>
+          <option value="Elite">Elite</option>
+        </select>
+        <label class="label_head unit" for="equipment">EQUIPMENT TYPE</label>
+        <select class="unit_drop" name="equipment" id="equipment">
+          <option value="">Select an Equipment Type</option>
+          <option value="Standard Issue">Standard Issue</option>
+          <option value="Advanced Weaponry">Advanced Weaponry</option>
+          <option value="Specialized Gear">Specialized Gear</option>
+          <option value="Riot Gear">Riot Gear</option>
+          <option value="Medical Supplies">Medical Supplies</option>
+          <option value="Basic (Limited Ammo)">Basic (Limited Ammo)</option>
+        </select>
+        <label class="label_head unit" for="command_structure"
+          >COMMAND STRUCTURE</label
+        >
+        <select
+          class="unit_drop"
+          name="command_structure"
+          id="command_structure"
+        >
+          <option value="">Select a Command Structure</option>
+          <option value="Centralized">Centralized</option>
+          <option value="Decentralized">Decentralized</option>
+          <option value="Centralized (Flexible)">Centralized (Flexible)</option>
+          <option value="Decentralized (Limited Communication)">
+            Decentralized (Limited Communication)
+          </option>
+          <option value="Centralized (Strict Hierarchy)">
+            Centralized (Strict Hierarchy)
+          </option>
+        </select>
+
+        <label class="label_head unit" for="logistics">LOGISTICS LEVEL</label>
+        <select class="unit_drop" name="logistics" id="logistics">
+          <option value="">Select a Logistics Level</option>
+          <option value="Minimal">Minimal</option>
+          <option value="Basic">Basic</option>
+          <option value="Adequate">Adequate</option>
+          <option value="Well-Supplied">Well-Supplied</option>
+          <option value="Overstocked">Overstocked</option>
+        </select>
+        <!-- Rest of the form fields... -->
+
+        <h2>ENTER ENEMY DETAILS</h2>
+        <label class="label_head enemy" for="enemy_size">ENEMY SIZE</label>
+        <input
+          class="enemy_drop"
+          type="text"
+          id="enemy_size"
+          name="enemy_size"
+          placeholder="Enter Enemy Size"
+          required="required"
+        />
+
+        <label class="label_head enemy" for="enemy_unit_type">ENEMY TYPE</label>
+        <select class="enemy_drop" name="enemy_unit_type" id="enemy_unit_type">
+          <option value="">Select an Enemy Type</option>
+          <option value="Irregular Militia">Irregular Militia</option>
+          <option value="Light Infantry">Light Infantry</option>
+          <option value="Mechanized Infantry">Mechanized Infantry</option>
+          <option value="Armored">Armored</option>
+          <option value="Special Forces">Special Forces</option>
+          <option value="Guerrilla">Guerrilla</option>
+          <option value="Cyber Warfare">Cyber Warfare</option>
+          <option value="Drone Operators">Drone Operators</option>
+        </select>
+
+        <label class="label_head enemy" for="enemy_capabilities"
+          >ENEMY CAPABILITY</label
+        >
+        <select
+          class="enemy_drop"
+          name="enemy_capabilities"
+          id="enemy_capabilities"
+        >
+          <option value="">Select an Enemy Capability</option>
+          <option value="Standard Equipment">Standard Equipment</option>
+          <option value="Improvised Explosive Devices (IEDs)">
+            Improvised Explosive Devices (IEDs)
+          </option>
+          <option value="Sniper Teams">Sniper Teams</option>
+          <option value="Advanced Communication">Advanced Communication</option>
+        </select>
+
+        <label class="label_head enemy" for="morale">MORALE LEVEL</label>
+        <select class="enemy_drop" name="morale" id="morale">
+          <option value="">Select a Morale Level</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Fanatical">Fanatical</option>
+        </select>
+
+        <label class="label_head enemy" for="leadership"
+          >LEADERSHIP QUALITY</label
+        >
+        <select class="enemy_drop" name="leadership" id="leadership">
+          <option value="">Select a Leadership Quality</option>
+          <option value="Weak">Weak</option>
+          <option value="Competent">Competent</option>
+          <option value="Strong">Strong</option>
+          <option value="Charismatic Leader">Charismatic Leader</option>
+          <option value="Incompetent">Incompetent</option>
+          <option value="Tactical Genius">Tactical Genius</option>
+        </select>
+
+        <label class="label_head enemy" for="mission_objective"
+          >MISSION OBJECTIVE</label
+        >
+        <select
+          class="enemy_drop"
+          name="mission_objective"
+          id="mission_objective"
+        >
+          <option value="">Select a Mission Objective</option>
+          <option value="Reconnaissance">Reconnaissance</option>
+          <option value="Secure Objective">Secure Objective</option>
+          <option value="Eliminate Enemy Force">Eliminate Enemy Force</option>
+          <option value="Rescue/Evacuation">Rescue/Evacuation</option>
+          <option value="Peacekeeping">Peacekeeping</option>
+          <option value="Counter-insurgency">Counter-insurgency</option>
+          <option value="Cyber Defense">Cyber Defense</option>
+          <option value="Infrastructure Protection">
+            Infrastructure Protection
+          </option>
+        </select>
+
+        <label class="label_head enemy" for="terrain_type">TERRAIN TYPE</label>
+        <select class="enemy_drop" name="terrain_type" id="terrain_type">
+          <option value="">Select a Terrain Type</option>
+          <option value="Urban">Urban</option>
+          <option value="Suburban">Suburban</option>
+          <option value="Rural">Rural</option>
+          <option value="Forest">Forest</option>
+          <option value="Jungle">Jungle</option>
+          <option value="Desert">Desert</option>
+          <option value="Mountain">Mountain</option>
+          <option value="Arctic">Arctic</option>
+          <option value="Coastal">Coastal</option>
+          <option value="Island">Island</option>
+        </select>
+
+        <label class="label_head enemy" for="weather_condition"
+          >WEATHER CONDITION</label
+        >
+        <select
+          class="enemy_drop"
+          name="weather_condition"
+          id="weather_condition"
+        >
+          <option value="">Select a Weather Condition</option>
+          <option value="Clear">Clear</option>
+          <option value="Cloudy">Cloudy</option>
+          <option value="Light Rain">Light Rain</option>
+          <option value="Heavy Rain">Heavy Rain</option>
+          <option value="Thunderstorm">Thunderstorm</option>
+          <option value="Snow">Snow</option>
+          <option value="Blizzard">Blizzard</option>
+          <option value="Fog">Fog</option>
+          <option value="Sandstorm">Sandstorm</option>
+          <option value="Extreme Heat">Extreme Heat</option>
+          <option value="Extreme Cold">Extreme Cold</option>
+        </select>
+
+        <label class="label_head enemy" for="time_day">TIME OF DAY</label>
+        <select class="enemy_drop" name="time_day" id="time_day">
+          <option value="">Select a Time of Day</option>
+          <option value="Day">Day</option>
+          <option value="Night">Night</option>
+          <option value="Dawn">Dawn</option>
+          <option value="Dusk">Dusk</option>
+        </select>
+
+        <label class="label_head enemy" for="civilian_presence"
+          >CIVILIAN PRESENCE</label
+        >
+        <select
+          class="enemy_drop"
+          name="civilian_presence"
+          id="civilian_presence"
+        >
+          <option value="">Select a Civilian Presence</option>
+          <option value="None">None</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
+        <label class="label_head enemy" for="supporting_arms"
+          >SUPPORTING ARMS</label
+        >
+        <select class="enemy_drop" name="supporting_arms" id="supporting_arms">
+          <option value="">Select a Supporting Arms</option>
+          <option value="No">No</option>
+          <option value="Yes (Artillery)">Yes (Artillery)</option>
+          <option value="Yes (Air Support)">Yes (Air Support)</option>
+          <option value="Yes (Air & Artillery)">Yes (Air & Artillery)</option>
+          <option value="Yes (Artillery & Close Air Support)">
+            Yes (Artillery & Close Air Support)
+          </option>
+          <option value="Yes (Naval Gunfire)">Yes (Naval Gunfire)</option>
+        </select>
+
+        <label class="label_head enemy" for="enemy_movement"
+          >ENEMY MOVEMENTS</label
+        >
+        <select class="enemy_drop" name="enemy_movement" id="enemy_movement">
+          <option value="">Select the Enemy Movements</option>
+          <option value="Static Defense">Static Defense</option>
+          <option value="Patrolling">Patrolling</option>
+          <option value="Aggressive Push">Aggressive Push</option>
+          <option value="Tactical Retreat">Tactical Retreat</option>
+          <option value="Guerrilla Tactics">Guerrilla Tactics</option>
+          <option value="Infiltration">Infiltration</option>
+          <option value="Encirclement">Encirclement</option>
+        </select>
+
+        <label class="label_head enemy" for="rules_engagement"
+          >RULES OF ENGAGEMENT</label
+        >
+        <select
+          class="enemy_drop"
+          name="rules_engagement"
+          id="rules_engagement"
+        >
+          <option value="">Select the Rules of Engagement</option>
+          <option value="Weapons Free">Weapons Free</option>
+          <option value="Return Fire Only">Return Fire Only</option>
+          <option value="Protect Civilians at All Costs">
+            Protect Civilians at All Costs
+          </option>
+          <option value="Minimize Collateral Damage">
+            Minimize Collateral Damage
+          </option>
+          <option value="Non-Lethal Force Only">Non-Lethal Force Only</option>
+          <option value="Observe and Report">Observe and Report</option>
+        </select>
+
+        <label class="label_head" for="algorithm">ALGORITHM</label>
+        <select name="algorithm" id="algorithm">
+          <option value="">Select an Algorithm</option>
+          <option value="k-NN">k-NN</option>
+          <option value="Linear Regression">Linear Regression</option>
+          <option value="Polynomial Regression">Polynomial Regression</option>
+          <option value="Logistic Regression">Logistic Regression</option>
+        </select>
+
+        <button type="submit" class="button">PREDICT</button>
+      </form>
+    </div>
+    <div class="output_box">
+      <h2 class="heading2">Get Ready For: {{ action_taken }}</h2>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBn+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
